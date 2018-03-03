@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>~ PSYCHIC GAME ~</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/javascript/game.js"></script>
+</head>
+
+<body>
+<header>
+    <div>
+        <h1>The Psychic Game</h1>
+    </div>
+</header>
+
+<div id="game">
+    <p>Guess what letter I'm thinking of</p>
+    <p>Wins: 0</p>
+    <p>Losses: 0</p>
+    <p>Guesses Left: 9</p>
+    <p>Your Guesses so far: </p>
+</div>
+
+<script type="text/javascript">
+
+    var computerChoice = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    var wins = 0;
+    var losses = 0;
+    var guessCount = 9;
+    var userGuesses = [];
+    var computerGuess = [];
+
+    window.onload = function() {
+        var compGuessed = computerChoice[Math.floor(Math.random() * computerChoice.length)];
+        computerGuess.push(compGuessed);
+        console.log(computerGuess[0]);
+    };
+
+    document.onkeyup = function(event) {
+        var userGuessed = event.key;
+        userGuesses.push(userGuessed);
+        console.log(computerGuess[0]);
+
+        if ((userGuessed === computerGuess[0]) && (guessCount > 0)) {
+            wins++;
+            guessCount = 9;
+            userGuesses.length = 0;
+            computerGuess.length = 0;
+            // var compGuessed = computerChoice[Math.floor(Math.random() * computerChoice.length)];
+            compGuessed = computerChoice[Math.floor(Math.random() * computerChoice.length)];
+            computerGuess.push(compGuessed);
+            console.log(computerGuess[0]);
+        }
+
+        else if ((userGuessed !== computerGuess[0]) && (guessCount > 0)) {
+            guessesCount = guessCount--;
+        }
+
+        else {
+            losses++;
+            guessCount = 9;
+            userGuesses.length = 0;
+            computerGuess.length = 0;
+            // var compGuessed = computerChoice[Math.floor(Math.random() * computerChoice.length)];
+            compGuessed = computerChoice[Math.floor(Math.random() * computerChoice.length)];
+            computerGuess.push(compGuessed);
+            console.log(computerGuess[0]);
+        }
+
+        var gameDiv = "<p>Guess what letter I'm thinking of</p>" +
+            "<p>Wins: " + wins + "</p>" +
+            "<p>Losses: " + losses + "</p>" +
+            "<p>Guesses Left: " + guessCount + "</p>" +
+            "<p>Your Guesses so far: " + userGuesses + "</p>";
+            document.querySelector("#game").innerHTML = gameDiv;
+
+    }
+
+</script>
+
+</body>
+</html>
